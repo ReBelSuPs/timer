@@ -75,14 +75,12 @@ function correctTimeStat() {
 	if ( timeStat.sec > 60 ) {
 		timeStat.min += parseInt(timeStat.sec/60);
 		timeStat.sec = timeStat.sec % 60;
-		sec.textContent = timeStat.sec;
-		min.textContent = timeStat.min;
+		displayTime();
 	}
 	if ( timeStat.min > 60 ) {
 		timeStat.hr += parseInt(timeStat.min/60);
 		timeStat.min = timeStat.min % 60;
-		hr.textContent = timeStat.hr;
-		min.textContent = timeStat.min;
+		displayTime();
 	}
 }
 
