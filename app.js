@@ -31,6 +31,7 @@ function decrementTimer() {
 		} else if (timeStat.hr) {
 			timeStat.hr--;
 			timeStat.min = 59;
+			timeStat.sec = 59;
 		}
 	 	displayTime();
 	} else {
