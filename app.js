@@ -107,6 +107,7 @@ startButton.addEventListener('click', () => {
 		infoElem.textContent = "Running!!!";
 		correctTimeStat();
 		timeStat.running = true;
+        decrementTimer();
 		myTimer = setInterval( decrementTimer, 1000 )
 	}
 })
