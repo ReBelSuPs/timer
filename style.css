@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
+
 *, *::before, *:after {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
+}
+*:focus {
+	border: none;
+	outline: none;
 }
 
 body {
@@ -12,7 +18,7 @@ body {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-style: monospace;
+	font-family: 'DM Mono', monospace;
 }
 
 
@@ -45,7 +51,10 @@ body {
 	position: relative;
 }
 
-
+.timer.end {
+	border: 3px solid red;
+	color: red;
+}
 .running::before {
 	content: '';
 	position: absolute;
@@ -63,16 +72,11 @@ body {
 	animation: none;
 }
 
-.actions {
-	width: 450px;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
 .btn {
 	border: 2px solid #f79862;
 	color: #fc6600;
 	padding: 10px 40px;
+	margin: 0 8px;
 	font-size: 1.8rem;
 	background-color: transparent;
 	transition: all .2s ease;

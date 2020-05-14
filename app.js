@@ -37,7 +37,8 @@ function decrementTimer() {
 	 	displayTime();
 	} else {
 		resetContent();
-		infoElem.textContent = "Please edit hr:min:sec and Press Start";
+		infoElem.textContent = "TIMES UP!!!!!!!!";
+		timer.classList.add('end');
 	}
 }
 
@@ -64,6 +65,7 @@ function resetContent() {
 	makeContentEditable();
 	clearInterval(myTimer);
 	timer.classList.remove('running');
+	timer.classList.remove('end');
 	timeStat.running = false;
 	for ( el of time ) {
 		el.textContent = "00";
@@ -102,7 +104,7 @@ startButton.addEventListener('click', () => {
 		infoElem.textContent = "Please enter valid time";
 		resetContent();
 	} else {
-		infoElem.textContent = "Running";
+		infoElem.textContent = "Running!!!";
 		correctTimeStat();
 		timeStat.running = true;
 		myTimer = setInterval( decrementTimer, 1000 )
