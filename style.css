@@ -52,8 +52,8 @@ body {
 }
 
 .timer.end {
-	border: 3px solid red;
-	color: red;
+	border: 3px solid #ed2939;
+	color: #ed2939;
 }
 .running::before {
 	content: '';

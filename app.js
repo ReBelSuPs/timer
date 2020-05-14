@@ -36,8 +36,8 @@ function decrementTimer() {
 		}
 	 	displayTime();
 	} else {
-		resetContent();
-		infoElem.textContent = "TIMES UP!!!!!!!!";
+		timer.classList.remove('running');
+		infoElem.textContent = "TIMES UP!!!!!!!! Press reset to start again";
 		timer.classList.add('end');
 	}
 }
