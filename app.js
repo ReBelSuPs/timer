@@ -20,9 +20,6 @@ let keys = null;
 makeContentEditable();
 
 function decrementTimer() {
-	if (timeStat.running){
-		makeContentNonEditable();
-	}
 	if ((timeStat.hr > 0 || timeStat.min > 0 || timeStat.sec > 0) && timeStat.running) {
 		if (timeStat.sec){
 			timeStat.sec--;
@@ -96,17 +93,31 @@ function displayTime() {
 	}
 }
 
+for ( el of time ) {
+	el.addEventListener('click', (e) => {
+		if (!timeStat.running) {
+			e.target.textContent = "";
+		}
+	})
+	el.addEventListener('keydown', (e) => {
+		if (e.keyCode === 13 || e.keyCode === 32) {
+			e.target.textContent = e.target.textContent.slice(0,-1);
+		}
+	})
+}
+
 startButton.addEventListener('click', () => {
 	timer.classList.remove('stop');
 	timer.classList.add('running');
 	setContent();
 	if (isNaN(timeStat.hr) || isNaN(timeStat.min) || isNaN(timeStat.sec)) {
-		infoElem.textContent = "Please enter valid time";
+		infoElem.textContent = "OOPS!!! Please enter valid time";
 		resetContent();
 	} else {
 		infoElem.textContent = "Running!!!";
 		correctTimeStat();
 		timeStat.running = true;
+		makeContentNonEditable();
         decrementTimer();
 		myTimer = setInterval( decrementTimer, 1000 )
 	}
@@ -115,7 +126,7 @@ pauseButton.addEventListener('click', () => {
 	timer.classList.add('stop');
 	clearInterval(myTimer);
 	timeStat.running = false;
-	infoElem.textContent = "Paused";
+	infoElem.textContent = "Paused.... Press reset to start again";
 })
 resetButton.addEventListener('click', () => {
 	resetContent();
