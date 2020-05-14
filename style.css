@@ -8,7 +8,7 @@ body {
 	margin: 0;
 	overflow: hidden;
 	height: 100vh;
-	background-color: lightgrey;
+	background-color: #333;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -17,31 +17,31 @@ body {
 
 
 .container {
-	width: 60%;
+	width: 95%;
 	height: 90vh;
 	text-align: center;	
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 #info {
 	color: #f79862;
-	font-size: 4rem;
+	font-size: 3rem;
 	text-align: center;
 	letter-spacing: 2px;
 }
 .timer {
 	border: 3px solid #f79862;
 	border-radius: 50%;
-	width: 500px;
-	height: 500px;
+	width: 40rem;
+	height: 40rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-size: 5rem;
-	color: #813f0b;
+	color: #fc6600;
 	position: relative;
 }
 
@@ -51,8 +51,8 @@ body {
 	position: absolute;
 	top: -3px;
 	left: -3px;
-	width: 500px;
-	height: 500px;
+	width: 40rem;
+	height: 40rem;
 	border-radius: 50%;
 	border-top: 5px solid #813f0b;
 	animation: spin 1s infinite;
@@ -71,14 +71,15 @@ body {
 }
 .btn {
 	border: 2px solid #f79862;
-	color: #813f0b;
+	color: #fc6600;
 	padding: 10px 40px;
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 	background-color: transparent;
 	transition: all .2s ease;
 }
 .btn:hover {
 	background-color: #f79862;
+	color: #333;
 }
 @keyframes spin {
 	from {
@@ -88,4 +89,6 @@ body {
 		transform: rotate(360deg);
 	}
 }
+
+
 

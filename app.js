@@ -5,8 +5,8 @@ const infoElem = document.querySelector('#info');
 const hr = document.querySelector('#hr');
 const min = document.querySelector('#min');
 const sec = document.querySelector('#sec');
+const time = document.querySelectorAll('.time');
 const timer = document.querySelector('.timer');
-
 
 const timeStat = {
 	hr: 0,
@@ -16,6 +16,7 @@ const timeStat = {
 }
 
 let myTimer = null;
+let keys = null;
 makeContentEditable();
 
 function decrementTimer() {
@@ -35,41 +36,38 @@ function decrementTimer() {
 		}
 	 	displayTime();
 	} else {
-		timeStat.running = false;
-		makeContentEditable();
-		clearInterval(myTimer);
+		resetContent();
 		infoElem.textContent = "Please edit hr:min:sec and Press Start";
-		timer.classList.remove('running');
 	}
 }
 
 function makeContentEditable() {
-	sec.setAttribute('contentEditable','true')
-	min.setAttribute('contentEditable','true')
-	hr.setAttribute('contentEditable','true')
+	for ( let el of time ){
+		el.setAttribute('contentEditable','true');
+	}
 }
 
 function makeContentNonEditable() {
-	sec.setAttribute('contentEditable','false')
-	min.setAttribute('contentEditable','false')
-	hr.setAttribute('contentEditable','false')
+	for ( let el of time ){
+		el.setAttribute('contentEditable','false');
+	}
 }
 
 function setContent() {
-	timeStat.hr = parseInt(hr.textContent);
-	timeStat.min = parseInt(min.textContent);
-	timeStat.sec = parseInt(sec.textContent);
+	keys = Object.keys(timeStat);
+	for (let i = 0; i < time.length; i++) {
+		timeStat[keys[i]] = Number(time[i].textContent);
+	}
 }
 
 function resetContent() {
 	makeContentEditable();
 	clearInterval(myTimer);
-	sec.textContent = "00";
-	timeStat.sec = 0;
-	min.textContent = "00";
-	timeStat.min = 0;
-	hr.textContent = "00";
-	timeStat.hr = 0;
+	timer.classList.remove('running');
+	timeStat.running = false;
+	for ( el of time ) {
+		el.textContent = "00";
+	}
 }
 
 function correctTimeStat() {
@@ -86,27 +84,29 @@ function correctTimeStat() {
 }
 
 function displayTime() {
-	if(timeStat.sec<10){
-		sec.textContent = `0${timeStat.sec}`;
-	} else {
-		sec.textContent = timeStat.sec;
+	keys = Object.keys(timeStat);
+	for (let i = 0; i < time.length; i++) {
+		if (timeStat[keys[i]]<10) {
+			time[i].textContent = `0${timeStat[keys[i]]}`;
+		} else {
+			time[i].textContent = timeStat[keys[i]];
+		}
 	}
-	if(timeStat.min<10){
-		min.textContent = `0${timeStat.min}`;
-	} else {
-		min.textContent = timeStat.min;
-	}
-	hr.textContent = timeStat.hr;
 }
 
 startButton.addEventListener('click', () => {
 	timer.classList.remove('stop');
 	timer.classList.add('running');
-	timeStat.running = true;
-	infoElem.textContent = "Running";
-	myTimer = setInterval( decrementTimer, 1000 )
 	setContent();
-	correctTimeStat();
+	if (isNaN(timeStat.hr) || isNaN(timeStat.min) || isNaN(timeStat.sec)) {
+		infoElem.textContent = "Please enter valid time";
+		resetContent();
+	} else {
+		infoElem.textContent = "Running";
+		correctTimeStat();
+		timeStat.running = true;
+		myTimer = setInterval( decrementTimer, 1000 )
+	}
 })
 pauseButton.addEventListener('click', () => {
 	timer.classList.add('stop');
@@ -115,8 +115,10 @@ pauseButton.addEventListener('click', () => {
 	infoElem.textContent = "Paused";
 })
 resetButton.addEventListener('click', () => {
-	timer.classList.remove('running');
-	timeStat.running = false;
-	infoElem.textContent = "Please edit hr:min:sec and Press Start";
 	resetContent();
-}) 
+	keys = Object.keys(timeStat);
+	for (let key of keys) {
+		timeStat[key] = 0;
+	}
+	infoElem.textContent = "Please edit hr:min:sec and Press Start";
+})
