@@ -17,7 +17,12 @@ const timeStat = {
 
 let myTimer = null;
 let keys = null;
-makeContentEditable();
+const sound = new Audio();
+sound.src = 'beep.wav';
+
+for ( let el of time ) {
+	makeContentEditable(el);
+}
 
 function decrementTimer() {
 	if ((timeStat.hr > 0 || timeStat.min > 0 || timeStat.sec > 0) && timeStat.running) {
@@ -36,19 +41,16 @@ function decrementTimer() {
 		timer.classList.remove('running');
 		infoElem.textContent = "TIMES UP!!!!!!!! Press reset to start again";
 		timer.classList.add('end');
+		sound.play();
 	}
 }
 
-function makeContentEditable() {
-	for ( let el of time ){
-		el.setAttribute('contentEditable','true');
-	}
+function makeContentEditable( el ) {
+	el.setAttribute('contentEditable','true');
 }
 
-function makeContentNonEditable() {
-	for ( let el of time ){
-		el.setAttribute('contentEditable','false');
-	}
+function makeContentNonEditable( el ) {
+	el.setAttribute('contentEditable','false');
 }
 
 function setContent() {
@@ -59,8 +61,11 @@ function setContent() {
 }
 
 function resetContent() {
-	makeContentEditable();
+	for ( let el of time ) {
+		makeContentEditable(el);
+	}
 	clearInterval(myTimer);
+	sound.pause();
 	timer.classList.remove('running');
 	timer.classList.remove('end');
 	timeStat.running = false;
@@ -95,13 +100,18 @@ function displayTime() {
 
 for ( el of time ) {
 	el.addEventListener('click', (e) => {
-		if (!timeStat.running) {
+		if (!timeStat.running && e.target.textContent < 3) {
 			e.target.textContent = "";
 		}
 	})
 	el.addEventListener('keydown', (e) => {
 		if (e.keyCode === 13 || e.keyCode === 32) {
-			e.target.textContent = e.target.textContent.slice(0,-1);
+			e.target.textContent = '';
+			infoElem.textContent = "Avoid spaces and enter key!!!";
+		}
+		if (e.target.textContent > 3){
+			makeContentNonEditable(e.target);
+			infoElem.textContent = "Length limit exceeded!! Press reset to set new timer or start to begin timer";
 		}
 	})
 }
@@ -117,7 +127,9 @@ startButton.addEventListener('click', () => {
 		infoElem.textContent = "Running!!!";
 		correctTimeStat();
 		timeStat.running = true;
-		makeContentNonEditable();
+		for ( let el of time ) {
+			makeContentNonEditable(el);
+		}
         decrementTimer();
 		myTimer = setInterval( decrementTimer, 1000 )
 	}

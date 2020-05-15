@@ -64,7 +64,7 @@ body {
 	width: 40rem;
 	height: 40rem;
 	border-radius: 50%;
-	border-top: 5px solid #813f0b;
+	border-top: 5px solid #ffa500;
 	animation: spin 1s infinite;
 	transition: border 0.2s ease-in-out;
 }
@@ -74,17 +74,16 @@ body {
 }
 
 .btn {
-	border: 2px solid #f79862;
+	text-decoration: none;
 	color: #fc6600;
-	padding: 10px 40px;
-	margin: 0 8px;
-	font-size: 1.8rem;
+	margin: 0 0.8em;
+	font-size: 5rem;
 	background-color: transparent;
-	transition: all .2s ease;
+	border: none;
+	border-radius: 50%;
 }
 .btn:hover {
-	background-color: #f79862;
-	color: #333;
+	color: #ffa500;
 }
 @keyframes spin {
 	from {
@@ -93,6 +92,42 @@ body {
 	to {
 		transform: rotate(360deg);
 	}
+}
+
+@media only screen and (max-width: 600px) {
+	html {
+		font-size: 11px;
+	}
+  	.timer {
+    	width: 38rem;
+   		height: 38rem;
+   		font-size: 4.5rem;
+  	}
+}
+
+@media only screen and (max-width: 480px) {
+	html {
+		font-size: 10px;
+	}
+  	.timer {
+    	width: 36rem;
+   		height: 36rem;
+   		font-size: 4rem;
+  	}
+  	.btn {
+  		font-size: 4rem;
+  	}
+}
+
+@media only screen and (max-width: 370px) {
+	html {
+		font-size: 9px;
+	}
+  	.timer {
+    	width: 34rem;
+   		height: 34rem;
+   		font-size: 2.5rem;
+  	}
 }
 
 
