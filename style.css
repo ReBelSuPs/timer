@@ -147,6 +147,9 @@ body {
   	.actions {
   		width: 350px;
   	}
+  	.info {
+  		font-size: 2.5rem;
+  	}
 }
 
 @media only screen and (max-width: 370px) {

@@ -55,6 +55,9 @@ function makeContentNonEditable( el ) {
 
 function setContent() {
 	keys = Object.keys(timeStat);
+	if (hr.textContent === "hh") { hr.textContent = "00" }
+	if (min.textContent === "mm") { min.textContent = "00" }
+	if (sec.textContent === "ss") { sec.textContent = "00" }
 	for (let i = 0; i < time.length; i++) {
 		timeStat[keys[i]] = Number(time[i].textContent);
 	}
@@ -69,9 +72,9 @@ function resetContent() {
 	timer.classList.remove('running');
 	timer.classList.remove('end');
 	timeStat.running = false;
-	for ( el of time ) {
-		el.textContent = "00";
-	}
+	hr.textContent = "hh";
+	min.textContent = "mm";
+	sec.textContent = "ss";
 }
 
 function correctTimeStat() {
@@ -100,7 +103,7 @@ function displayTime() {
 
 for ( el of time ) {
 	el.addEventListener('click', (e) => {
-		if (!timeStat.running && e.target.textContent < 3) {
+		if (!timeStat.running && e.target.textContent.length < 3) {
 			e.target.textContent = "";
 		}
 	})
