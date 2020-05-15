@@ -41,12 +41,12 @@ body {
 .timer {
 	border: 3px solid #f79862;
 	border-radius: 50%;
-	width: 40rem;
-	height: 40rem;
+	width: 500px;
+	height: 500px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 5rem;
+	font-size: 4.5rem;
 	color: #fc6600;
 	position: relative;
 }
@@ -61,29 +61,35 @@ body {
 	position: absolute;
 	top: -3px;
 	left: -3px;
-	width: 40rem;
-	height: 40rem;
+	width: 500px;
+	height: 500px;
 	border-radius: 50%;
-	border-top: 5px solid #ffa500;
+	border-top: 6px solid #fc6600;
 	animation: spin 1s infinite;
-	transition: border 0.2s ease-in-out;
+	transition: border 0.1s ease-in-out;
 }
 
 .running.stop::before {
 	animation: none;
 }
 
+.actions {
+	width: 500px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
 .btn {
 	text-decoration: none;
-	color: #fc6600;
+	color: #f79862;
 	margin: 0 0.8em;
-	font-size: 5rem;
+	font-size: 3rem;
 	background-color: transparent;
 	border: none;
 	border-radius: 50%;
 }
 .btn:hover {
-	color: #ffa500;
+	color: #fc6600;
 }
 @keyframes spin {
 	from {
@@ -94,14 +100,35 @@ body {
 	}
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1250px) {
 	html {
 		font-size: 11px;
 	}
+	.timer {
+    	width: 475px;
+   		height: 475px;
+  	}
+  	.running::before {
+  		width: 475px;
+  		height: 475px;
+  	}
+  	.actions {
+  		width: 475px;
+  	}
+}
+
+
+@media only screen and (max-width: 800px) {
   	.timer {
-    	width: 38rem;
-   		height: 38rem;
-   		font-size: 4.5rem;
+    	width: 450px;
+   		height: 450px;
+  	}
+  	.running::before {
+  		width: 450px;
+  		height: 450px;
+  	}
+  	.actions {
+  		width: 450px;
   	}
 }
 
@@ -110,23 +137,29 @@ body {
 		font-size: 10px;
 	}
   	.timer {
-    	width: 36rem;
-   		height: 36rem;
-   		font-size: 4rem;
+    	width: 350px;
+   		height: 350px;
   	}
-  	.btn {
-  		font-size: 4rem;
+  	.running::before {
+  		width: 350px;
+  		height: 350px;
+  	}
+  	.actions {
+  		width: 350px;
   	}
 }
 
 @media only screen and (max-width: 370px) {
-	html {
-		font-size: 9px;
-	}
   	.timer {
-    	width: 34rem;
-   		height: 34rem;
-   		font-size: 2.5rem;
+    	width: 300px;
+   		height: 300px;
+  	}
+  	.running::before {
+  		width: 300px;
+  		height: 300px;
+  	}
+  	.actions {
+  		width: 300px;
   	}
 }
 
