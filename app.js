@@ -125,7 +125,7 @@ for ( el of time ) {
 			e.target.textContent = '';
 			infoElem.textContent = "Avoid spaces and enter key!!!";
 		}
-		if (e.target.textContent > 3){
+		if (e.target.textContent.length > 1){
 			makeContentNonEditable(e.target);
 			infoElem.textContent = "Length limit exceeded!! Press reset to set new timer or start to begin timer";
 		}
