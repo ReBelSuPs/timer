@@ -76,14 +76,15 @@ body {
 .actions {
 	width: 500px;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 .btn {
 	text-decoration: none;
 	color: #f79862;
+	cursor: pointer;
 	margin: 0 0.8em;
-	font-size: 3rem;
+	font-size: 4rem;
 	background-color: transparent;
 	border: none;
 	border-radius: 50%;

@@ -18,14 +18,26 @@ const timeStat = {
 let myTimer = null;
 let keys = null;
 const sound = new Audio();
-sound.src = 'beep.wav';
+sound.loop = false;
+var source= document.createElement('source');
+if (sound.canPlayType('audio/mpeg;')) {
+    source.type= 'audio/mpeg';
+    source.src= 'beeper.mp3';
+} else if (sound.canPlayType('audio/ogg;')){
+    source.type= 'audio/ogg';
+    source.src= 'beeper.ogg';
+} else {
+    source.type= 'audio/wav';
+    source.src= 'beeper.wav';
+}
+sound.appendChild(source);
 
 for ( let el of time ) {
 	makeContentEditable(el);
 }
 
 function decrementTimer() {
-	if ((timeStat.hr > 0 || timeStat.min > 0 || timeStat.sec > 0) && timeStat.running) {
+	if ((timeStat.hr > 0 || timeStat.min > 0 || timeStat.sec > 0)) {
 		if (timeStat.sec){
 			timeStat.sec--;
 		} else if (timeStat.min) {
@@ -69,6 +81,7 @@ function resetContent() {
 	}
 	clearInterval(myTimer);
 	sound.pause();
+	sound.currentTime = 0;
 	timer.classList.remove('running');
 	timer.classList.remove('end');
 	timeStat.running = false;
@@ -129,12 +142,11 @@ startButton.addEventListener('click', () => {
 	} else {
 		infoElem.textContent = "Running!!!";
 		correctTimeStat();
-		timeStat.running = true;
 		for ( let el of time ) {
 			makeContentNonEditable(el);
 		}
-        decrementTimer();
-		myTimer = setInterval( decrementTimer, 1000 )
+        if(!timeStat.running){ decrementTimer();myTimer = setInterval( decrementTimer, 1000 ) }
+		timeStat.running = true;
 	}
 })
 pauseButton.addEventListener('click', () => {
